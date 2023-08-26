@@ -1,16 +1,20 @@
-FROM node:16-alpine
+# Use an official Node.js runtime as the base image
+FROM node:14
 
-# Create app directory
-WORKDIR /my-app
+# Set the working directory
+WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+# Install app dependencies
 RUN npm install
 
-# Bundle app source
+# Copy app source code to the working directory
 COPY . .
 
-EXPOSE 8080
-CMD [ "node", "index.js" ]
+# Expose the port your app listens on
+EXPOSE 3000
+
+# Command to run your application
+CMD ["node", "app.js"]
